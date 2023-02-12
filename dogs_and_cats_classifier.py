@@ -64,4 +64,34 @@ of 150 pixels and a height of 150 pixels
 (150*150)'''
 IMG_SHAPE = 150
 
-#Data prep
+#Data preparation
+'''Images must be formatted into appropriately pre-processed 
+floating point tensors before being fed into the network. 
+The steps involved in preparing these images are:
+1. Read images from the disk
+2. Decode contents of these images and convert it into proper grid format as per their RGB content
+3. Convert them into floating point tensors
+
+Rescale the tensors from values between 0 and 255 to values between 0 and 1, 
+as neural networks prefer to deal with small input values.
+'''
+
+#Generators for our training and validation data
+train_image_generator = ImageDataGenerator(rescale=1./255)
+validation_image_generator = ImageDataGenerator(rescale=1./255)
+
+#flow_from_directory method will load images from the disk, apply rescaling and resize
+#them using single line of code😉
+train_data_gen = train_image_generator.flow_from_directory(batch_size=BATCH_SIZE,
+                                                           directory=train_dir,
+                                                           shuffle=True,
+                                                           target_size=(IMG_SHAPE,IMG_SHAPE),
+                                                           class_mode='binary')
+
+val_data_gen = validation_image_generator.flow_from_directory(batch_size=BATCH_SIZE,
+                                                           directory=validation_dir,
+                                                           shuffle=False,
+                                                           target_size=(IMG_SHAPE,IMG_SHAPE),#(150,150)
+                                                           class_mode='binary')
+
+#Visualizing training images using matplot

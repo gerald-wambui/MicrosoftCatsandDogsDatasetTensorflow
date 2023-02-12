@@ -56,16 +56,22 @@ print('-----')
 print('Total size of cats and dogs dataset:', num_tt)
 
 #Setting model parameters for convenience
-'''Number of training examples to process before
-updating our models variables'''
+'''
+Number of training examples to process before
+updating our models variables
+'''
 BATCH_SIZE = 100
-'''Our training data consists of images with width 
+'''
+Our training data consists of images with width 
 of 150 pixels and a height of 150 pixels 
-(150*150)'''
+(150*150)
+'''
 IMG_SHAPE = 150
 
 #Data preparation
-'''Images must be formatted into appropriately pre-processed 
+
+'''
+Images must be formatted into appropriately pre-processed 
 floating point tensors before being fed into the network. 
 The steps involved in preparing these images are:
 1. Read images from the disk
@@ -80,7 +86,9 @@ as neural networks prefer to deal with small input values.
 train_image_generator = ImageDataGenerator(rescale=1./255)
 validation_image_generator = ImageDataGenerator(rescale=1./255)
 
-#flow_from_directory method will load images from the disk, apply rescaling and resize
+#flow_from_directory method will load images from the disk,
+# apply rescaling and
+# resize
 #them using single line of code😉
 train_data_gen = train_image_generator.flow_from_directory(batch_size=BATCH_SIZE,
                                                            directory=train_dir,
@@ -95,3 +103,36 @@ val_data_gen = validation_image_generator.flow_from_directory(batch_size=BATCH_S
                                                            class_mode='binary')
 
 #Visualizing training images using matplot
+sample_training_images, _ = next(train_data_gen)
+
+#next fun returns a batch from the dataset
+
+#1 row 5 columns
+def plotImages(images_arr):
+    fig, axes = plt.subplots(1, 5, figsize=(20,20))
+    axes = axes.flatten()
+    for img, ax in zip(images_arr, axes):
+        ax.imshow(img)
+        plt.tight_layout()
+        plt.show()
+        
+    plotImages(sample_training_images[:5])#plot images 0-4
+
+#Model Creation
+#defining our model
+
+model = tf.keras.models.Sequential([
+    tf.keras.layers.Conv2D(32, (3,3), activation='relu', input_shape=(150, 150, 3)),
+    tf.keras.layers.MaxPooling2D(2, 2),
+    tf.keras.layers.Conv2D(64, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Conv2D(128, (3,3), activation='relu'),
+    tf.keras.layers.MaxPooling2D(2,2),
+    tf.keras.layers.Flatten(),
+    tf.keras.layers.Dense(512, activation='relu'),
+    tf.keras.layers.Dense(2)
+])
+
+#compile the model

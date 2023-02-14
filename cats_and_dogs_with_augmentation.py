@@ -104,3 +104,11 @@ augmented_images = [train_data_gen[0][0][0] for i in range(5)]
 plotImages(augmented_images)
 
 #validation data generator
+image_gen_val = ImageDataGenerator(rescale=1./255)
+val_data_gen = image_gen_val.flow_from_directory(batch_size=BATCH_SIZE,
+                                                 directory=validation_dir,
+                                                 target_size=(IMG_SHAPE, IMG_SHAPE),
+                                                 class_mode='binary')
+
+#Model creation
+

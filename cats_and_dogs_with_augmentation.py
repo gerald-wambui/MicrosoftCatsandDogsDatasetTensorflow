@@ -48,3 +48,19 @@ IMG_SHAPE  = 150
 # images with width of 150 pixels and height of 150 pixels
 
 #Data Augmentation
+#Overfitting often occurs when we have a small number of training examples
+#one way to do this is augment our dataset
+def plotImages(images_arr):
+    fig, axes = plt.subplots(1, 5, figsize=(20,20))
+    axes = axes.flatten()
+    for img, ax in zip(images_arr, axes):
+        ax.imshow(img)
+    plt.tight_layout()
+    plt.show()
+
+#Flipping images horizontally
+image_gen = ImageDataGenerator(rescale=1./255, horizontal_flip=True)
+train_data_gen = image_gen.flow_from_directory(batch_size=BATCH_SIZE,
+                                               directory=train_dir,
+                                               shuffle=True,
+                                               target_size=(IMG_SHAPE,IMG_SHAPE))

@@ -134,3 +134,13 @@ model.summary()
 
 #Train the model
 #use fit_generator instead of fit since the batches are coming from a generator
+EPOCHS = 100
+history = model.fit_generator(
+    train_data_gen,
+    steps_per_epoch=int(np.ceil(total_train / float(BATCH_SIZE))),
+    epochs=EPOCHS,
+    validation_data=val_data_gen,
+    validation_steps=int(np.ceil(total_val / float(BATCH_SIZE)))
+)
+
+#Visualizing results of the training

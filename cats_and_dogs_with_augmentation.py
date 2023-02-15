@@ -32,14 +32,14 @@ total_train = num_cats_tr + num_dogs_tr
 total_val = num_cats_val + num_dogs_val
 
 
-print('total training cat images:', num_cats_tr)
-print('total training dog images:', num_dogs_tr)
+print('Total training cat Images:', num_cats_tr)
+print('Total training dog Images:', num_dogs_tr)
 
-print('total validation cat images:', num_cats_val)
-print('total validation dog images:', num_dogs_val)
-print("--")
-print("Total training images:", total_train)
-print("Total validation images:", total_val)
+print('Total validation cat Images:', num_cats_val)
+print('Total validation dog Images:', num_dogs_val)
+print("----")
+print("Total training Images:", total_train)
+print("Total validation Images:", total_val)
 
 #Setting Model parameters
 BATCH_SIZE = 100
@@ -157,9 +157,11 @@ plt.subplot(1, 2, 1)
 plt.plot(epochs_range, acc, label='Training Accuracy')
 plt.plot(epochs_range, val_acc, label='Validation Accuracy')
 plt.legend(loc='lower right')
-plt.title('Training and Validation Accuracy')
+plt.title('Training And Validation Accuracy')
 
 plt.subplot(1, 2, 2)
 plt.plot(epochs_range, loss, label='Training Loss')
 plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
+plt.title('Training and Validation Loss')
+plt.show()

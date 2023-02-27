@@ -26,3 +26,10 @@ grace_hopper = Image.open(grace_hopper).resize((IMAGE_RES, IMAGE_RES))
 grace_hopper
 grace_hopper = np.array(grace_hopper)/255.0
 grace_hopper.shape
+
+#add batch dimension
+result = model.predict(grace_hopper[np.neewaxis, ...])
+result.shape
+
+predicted_class = np.argmax(result[0], axis=-1)
+predicted_class

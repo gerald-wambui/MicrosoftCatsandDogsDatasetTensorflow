@@ -33,3 +33,7 @@ result.shape
 
 predicted_class = np.argmax(result[0], axis=-1)
 predicted_class
+
+#Decode Predictions
+labels_path = tf.keras.utils.get_file('ImageNetLabels.txt', 'https://storage.googleapis.com/download.tensorflow.org/')
+imagenet_labels = np.array(open(labels_path).read().splitlines())

@@ -61,3 +61,8 @@ for i, example_image in enumerate(train_examples.take(3)):
 def format_image(image, label):
     image = tf.image.resize(image, (IMAGE_RES, IMAGE_RES))/255.0
     return image, label
+
+BATCH_SIZE=32
+
+train_batches = train_examples.shuffle(num_examples//4).map(format_image).batch(BATCH_SIZE).prefetch(1)
+validation_batches = validation_examples.map(format_image).batch(BATCH_SIZE).prefetch(1)

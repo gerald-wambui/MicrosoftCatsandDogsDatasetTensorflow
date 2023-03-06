@@ -70,3 +70,21 @@ validation_batches = validation_examples.map(format_image).batch(BATCH_SIZE).pre
 
 result_batch = model.predict(image_batch)
 
+
+predicted_class_names = imagenet_labels[np.argmax(result_batch, axis=-1)]
+predicted_class_names
+
+plt.figure(figsize=(10, 9))
+
+for n in range(30):
+    plt.subplot(6, 5, n+1)
+    plt.subplots_adjust(hspace=0.3)
+    plt.imshow(image_batch[n])
+    plt.title(predicted_class_names[n])
+    plt.axis('off')
+    _ = plt.suptitle("ImageNet predictions")
+
+#URL = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/2"
+URL = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/2"
+feature_extractor = hub.KerasLayer(URL,
+

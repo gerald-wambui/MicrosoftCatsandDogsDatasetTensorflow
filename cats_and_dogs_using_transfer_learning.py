@@ -66,3 +66,7 @@ BATCH_SIZE=32
 
 train_batches = train_examples.shuffle(num_examples//4).map(format_image).batch(BATCH_SIZE).prefetch(1)
 validation_batches = validation_examples.map(format_image).batch(BATCH_SIZE).prefetch(1)
+
+
+result_batch = model.predict(image_batch)
+

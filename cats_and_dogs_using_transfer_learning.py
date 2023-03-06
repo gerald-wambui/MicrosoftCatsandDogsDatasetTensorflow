@@ -91,3 +91,15 @@ for n in range(30):
 URL = "https://tfhub.dev/google/tf2-preview/mobilenet_v2/feature_vector/2"
 feature_extractor = hub.KerasLayer(URL,
 
+
+feature_batch = feature_extractor(image_batch)
+print(feature_batch.shape)
+
+feature_extractor.trainable = False
+
+model = tf.keras.Sequential([
+    feature_extractor,
+    layers.Dense(2)
+])
+model.summary()
+

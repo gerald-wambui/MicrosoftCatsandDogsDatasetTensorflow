@@ -124,4 +124,4 @@ val_acc = history.history['val_accuracy']
 loss = history.history['loss']
 val_loss = history.history['val_loss']
 
-
+##Not feeling myself hope to commit tomorrow

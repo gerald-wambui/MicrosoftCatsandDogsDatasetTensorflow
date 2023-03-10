@@ -140,3 +140,11 @@ plt.plot(epochs_range, val_loss, label='Validation Loss')
 plt.legend(loc='upper right')
 plt.title('Training and Validation Loss')
 plt.show()
+
+
+'''
+check the predictions first get the ordered list of class names
+then run the image batch through the model and 
+convert the 
+indices to class names
+'''

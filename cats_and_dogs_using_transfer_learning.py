@@ -125,3 +125,5 @@ loss = history.history['loss']
 val_loss = history.history['val_loss']
 
 ##Not feeling myself hope to commit tomorrow
+
+epochs_range = range(EPOCHS)
